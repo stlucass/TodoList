@@ -6,22 +6,23 @@ Este projeto é uma aplicação Full Stack de Lista de Tarefas, consistindo em u
 
 O repositório está organizado da seguinte forma:
 
-.
-├── backend/        # Contém a aplicação Spring Boot (Java)
-│   ├── src/
-│   ├── pom.xml
-│   └── Dockerfile  # Dockerfile para o backend
+
+├── backend/
+│   ├── src/                     # Código fonte Java/Spring Boot
+│   ├── pom.xml                  # Dependências e build do backend (Maven)
+│   └── Dockerfile               # Instruções para containerizar o backend
 ├── frontend/
-│   └── TodoList/   # Contém a aplicação React (TypeScript + Vite)
-│       ├── src/
-│       ├── public/
-│       ├── package.json
-│       ├── vite.config.ts
-│       ├── nginx.conf  # Configuração do Nginx para servir o frontend
-│       └── Dockerfile  # Dockerfile para o frontend
-├── .gitignore      # Arquivos e pastas ignorados pelo Git
-├── docker-compose.yml # Arquivo para orquestrar os contêineres Docker
-└── README.md       # Este arquivo
+│   └── TodoList/
+│       ├── src/                 # Código fonte React/TypeScript
+│       ├── public/              # Arquivos estáticos públicos do frontend
+│       ├── package.json         # Dependências e scripts do frontend (npm)
+│       ├── vite.config.ts       # Configuração do Vite
+│       ├── nginx.conf           # Configuração do Nginx para servir o frontend
+│       └── Dockerfile           # Instruções para containerizar o frontend
+├── .gitignore                   # Arquivos ignorados pelo Git
+├── docker-compose.yml           # Orquestração dos contêineres Docker
+└── README.md                    # Este arquivo
+
 
 
 ## Tecnologias Utilizadas

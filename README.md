@@ -2,29 +2,6 @@
 
 Este projeto é uma aplicação Full Stack de Lista de Tarefas, consistindo em um backend construído com Java e Spring Boot, e um frontend desenvolvido com React, TypeScript e Vite. A aplicação é containerizada usando Docker e orquestrada com Docker Compose, incluindo um banco de dados PostgreSQL.
 
-## Estrutura do Projeto
-
-O repositório está organizado da seguinte forma:
-
-.
-├── backend/
-│   ├── src/                     # Código fonte Java/Spring Boot
-│   ├── pom.xml                  # Dependências e build do backend (Maven)
-│   └── Dockerfile               # Instruções para containerizar o backend
-├── frontend/
-│   └── TodoList/
-│       ├── src/                 # Código fonte React/TypeScript
-│       ├── public/              # Arquivos estáticos públicos do frontend
-│       ├── package.json         # Dependências e scripts do frontend (npm)
-│       ├── vite.config.ts       # Configuração do Vite
-│       ├── nginx.conf           # Configuração do Nginx para servir o frontend
-│       └── Dockerfile           # Instruções para containerizar o frontend
-├── .gitignore                   # Arquivos ignorados pelo Git (exemplo, você precisará criar o seu)
-├── docker-compose.yml           # Orquestração dos contêineres Docker
-└── README.md                    # Este arquivo
-
-
-
 ## Tecnologias Utilizadas
 
 **Backend:**

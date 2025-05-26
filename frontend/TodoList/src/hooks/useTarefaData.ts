@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { TarefaData } from "../interface/tarefaData"; // Ajuste o caminho se necessário
+import type { TarefaData } from "../interface/tarefaData";
 import { useQuery } from "@tanstack/react-query";
 
 const API_URL_BASE = "http://localhost:3000/api/tarefas";

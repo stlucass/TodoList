@@ -2,9 +2,8 @@ import './App.css';
 import { Card } from './components/cards/card';
 import { TarefaForm } from './components/forms/tarefaForm';
 import type { TarefaData } from './interface/tarefaData';
-// Correção na importação de StatusFiltro:
 import { useTarefaData } from './hooks/useTarefaData';
-import type { StatusFiltro } from './hooks/useTarefaData'; // Importado como tipo
+import type { StatusFiltro } from './hooks/useTarefaData';
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
@@ -20,7 +19,7 @@ function App() {
   const { data: tarefas, isLoading, isError, error } = useTarefaData(statusFiltroSelecionado);
 
   const [tarefaEmEdicao, setTarefaEmEdicao] = useState<TarefaData | null>(null);
-  
+
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
@@ -50,7 +49,7 @@ function App() {
   };
 
   const handleFormSubmitSuccess = () => {
-    setTarefaEmEdicao(null); 
+    setTarefaEmEdicao(null);
   };
 
   const handleFiltroChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -61,30 +60,30 @@ function App() {
     <div className="container">
       <h1>Lista de Tarefas</h1>
 
-      <TarefaForm 
-        tarefaParaEditar={tarefaEmEdicao} 
-        onCancelEdit={handleCancelEdit}
-        onFormSubmitSuccess={handleFormSubmitSuccess}
-      />
-
-      <div className="filtro-container" style={{ marginBottom: '20px', marginTop: '20px' }}>
-        <label htmlFor="filtro-status" style={{ marginRight: '10px', fontWeight: 'bold' }}>Filtrar por Status:</label>
-        <select id="filtro-status" value={statusFiltroSelecionado} onChange={handleFiltroChange}>
-          <option value="TODOS">Todos</option>
-          <option value="PENDENTE">Pendente</option>
-          <option value="EM_ANDAMENTO">Em Andamento</option>
-          <option value="CONCLUIDA">Concluída</option>
-        </select>
+      <div className="app-controles"> {/* NOVO WRAPPER */}
+        <TarefaForm
+          tarefaParaEditar={tarefaEmEdicao}
+          onCancelEdit={handleCancelEdit}
+          onFormSubmitSuccess={handleFormSubmitSuccess}
+        />
+        <div className="filtro-container"> {/* O filtro já tem seu container */}
+          <label htmlFor="filtro-status">Filtrar por Status:</label>
+          <select id="filtro-status" value={statusFiltroSelecionado} onChange={handleFiltroChange}>
+            <option value="TODOS">Todos</option>
+            <option value="PENDENTE">Pendente</option>
+            <option value="EM_ANDAMENTO">Em Andamento</option>
+            <option value="CONCLUIDA">Concluída</option>
+          </select>
+        </div>
       </div>
-
       {isLoading && <p>Carregando tarefas...</p>}
       {isError && <p>Erro ao carregar tarefas: {error instanceof Error ? error.message : 'Ocorreu um erro desconhecido'}</p>}
-      
+
       <div className="card-container">
-        {!isLoading && !isError && tarefas?.map((tarefa: TarefaData) => ( 
+        {!isLoading && !isError && tarefas?.map((tarefa: TarefaData) => (
           <Card
-            key={tarefa.id} 
-            tarefa={tarefa} 
+            key={tarefa.id}
+            tarefa={tarefa}
             onEdit={handleEdit}
             onDelete={handleDelete}
           />

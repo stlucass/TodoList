@@ -1,103 +1,147 @@
-/* Estilos para TarefaForm.css */
-
-/* Container do formulário - inspirado no .tarefa-card */
 .tarefa-form {
-  background-color: #fff; /* Fundo branco como o card */
-  border-radius: 8px; /* Mesmo border-radius do card */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Mesma sombra do card */
-  margin-bottom: 30px; /* Aumentei a margem inferior para separar bem da lista */
-  padding: 25px; /* Padding similar ao card */
-  max-width: 500px; /* Limita a largura máxima do formulário */
-  margin-left: auto; /* Centraliza o formulário se houver espaço */
-  margin-right: auto; /* Centraliza o formulário se houver espaço */
+  background-color: var(--cor-superficie);
+  padding: calc(var(--espacamento-base) * 1.8) calc(var(--espacamento-base) * 2);
+  border-radius: var(--border-radius-grande);
+  box-shadow: var(--sombra-media);
+  border: 1px solid var(--cor-borda);
 }
 
 .tarefa-form h2 {
-  text-align: center;
-  color: #2c3e50; /* Cor similar ao .tarefa-titulo */
+  color: var(--cor-texto-primaria);
   margin-top: 0;
-  margin-bottom: 25px;
-  font-size: 1.5em;
+  margin-bottom: calc(var(--espacamento-base) * 1.8);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: var(--fonte-titulos);
+  padding-bottom: calc(var(--espacamento-base) * 0.75);
+  border-bottom: 1px solid var(--cor-borda);
+  text-align: left;
 }
 
 .form-group {
-  margin-bottom: 18px; /* Espaçamento entre os grupos de campos */
+  margin-bottom: calc(var(--espacamento-base) * 1.4);
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
-  color: #34495e; /* Um pouco mais escuro para os labels */
-  font-size: 0.95em;
+  margin-bottom: calc(var(--espacamento-base) * 0.5);
+  font-weight: 500;
+  color: var(--cor-texto-secundaria);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
+/* Estilo base comum para input de título, textarea e select */
 .form-group input[type="text"],
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 12px; /* Padding interno dos campos */
-  border: 1px solid #bdc3c7; /* Borda similar aos botões do card */
-  border-radius: 4px; /* Mesmo border-radius dos botões do card */
+  padding: calc(var(--espacamento-base) * 0.7) calc(var(--espacamento-base) * 1);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--border-radius-base);
+  background-color: var(--cor-superficie-input);
+  color: var(--cor-texto-primaria);
+  font-family: var(--fonte-corpo);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  transition: var(--transition-base);
   box-sizing: border-box;
-  font-size: 1em;
-  color: #333;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  /* Altura calculada para uma linha de texto, incluindo padding e borda */
+  height: calc( (0.95rem * 1.5) + ( (var(--espacamento-base) * 0.7) * 2) + 2px );
 }
 
+/* Estilos de foco comuns */
 .form-group input[type="text"]:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  border-color: #3498db; /* Cor de destaque no foco (azul dos status) */
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2); /* Sombra sutil no foco */
   outline: none;
+  border-color: var(--cor-amarelo-principal);
+  background-color: var(--cor-superficie);
+  box-shadow: 0 0 0 3px rgba(var(--cor-amarelo-principal-rgb), 0.25);
 }
 
+/* Estilos específicos para o textarea da descrição para IGUALAR ao input de linha única */
 .form-group textarea {
-  min-height: 100px; /* Altura mínima para a área de descrição */
-  resize: vertical; /* Permite redimensionamento vertical */
+  /* A altura já está definida na regra comum acima para igualar o input */
+  resize: none;         /* Remove a capacidade de redimensionamento */
+  overflow: hidden;     /* Esconde qualquer conteúdo que exceda a altura de uma linha */
+  white-space: nowrap;  /* Impede a quebra de linha do texto digitado */
+  /* Se precisar de múltiplas linhas com altura fixa, remova white-space e overflow:hidden, ajuste height e adicione overflow-y: auto */
 }
 
-.tarefa-form button[type="submit"] {
-  display: block; /* Faz o botão ocupar a largura disponível se não tiver outra configuração */
-  width: 100%; /* Botão com largura total */
-  background-color: #2ecc71; /* Verde do status 'concluida', para ação positiva */
-  color: white;
-  padding: 12px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1.1em;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-  margin-top: 10px; /* Espaço acima do botão */
+.form-actions {
+  display: flex;
+  gap: calc(var(--espacamento-base) * 0.8);
+  margin-top: calc(var(--espacamento-base) * 2);
+  justify-content: flex-end;
 }
 
-.tarefa-form button[type="submit"]:hover {
-  background-color: #27ae60; /* Verde um pouco mais escuro no hover */
-}
-
-.tarefa-form button[type="submit"]:disabled {
-  background-color: #95a5a6; /* Cor para botão desabilitado */
+.tarefa-form button:disabled {
+  background-color: var(--cor-superficie-input) !important;
+  color: var(--cor-texto-desabilitado) !important;
+  border: 1px solid var(--cor-borda) !important;
+  box-shadow: none !important;
   cursor: not-allowed;
+  opacity: 0.6;
+}
+.tarefa-form button:disabled:hover {
+  transform: none;
 }
 
 .error-message {
-  color: #e74c3c; /* Vermelho para mensagens de erro (cor do btn-excluir:hover) */
-  font-size: 0.9em;
-  margin-top: 10px;
-  text-align: center;
+  color: var(--cor-perigo-texto);
+  font-size: 0.85rem;
+  margin-top: var(--espacamento-base);
+  padding: calc(var(--espacamento-base) * 0.7) var(--espacamento-base);
+  background-color: rgba(var(--cor-perigo-rgb), 0.8);
+  border-left: 4px solid var(--cor-perigo);
+  border-radius: var(--border-radius-base);
+  text-align: left;
+  box-shadow: var(--sombra-leve);
 }
 
-/* Ajustes no body para garantir que o formulário e os cards fiquem bem (opcional)
-   Estes estilos de body já foram fornecidos por você.
-   Se eles estiverem em um arquivo CSS global (como index.css ou App.css),
-   não precisa repeti-los aqui.
-*/
+/* Responsividade para o formulário */
+@media (max-width: 768px) {
+  .tarefa-form {
+    padding: calc(var(--espacamento-base) * 1.5);
+    box-shadow: var(--sombra-leve);
+  }
+  .tarefa-form h2 {
+    font-size: 1.3rem;
+    margin-bottom: calc(var(--espacamento-base) * 1.5);
+  }
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .form-actions button {
+    width: 100%;
+  }
+  .form-actions button:not(:last-child) {
+    margin-bottom: calc(var(--espacamento-base) * 0.75);
+  }
+}
 
-body {
-  font-family: sans-serif;
-  background-color: #f4f7f6;
-  padding: 20px;
-  color: #333;
+@media (max-width: 480px) {
+  .tarefa-form {
+    padding: var(--espacamento-base);
+    border-radius: var(--border-radius-base);
+  }
+  .tarefa-form h2 {
+    font-size: 1.2rem;
+  }
+  .form-group label {
+    font-size: 0.75rem;
+    letter-spacing: 0.4px;
+  }
+  /* Ajustes para os campos em telas muito pequenas, se necessário */
+  .form-group input[type="text"],
+  .form-group textarea,
+  .form-group select {
+    font-size: 0.9rem; /* Pode reduzir um pouco a fonte */
+    padding: calc(var(--espacamento-base) * 0.6) calc(var(--espacamento-base) * 0.8);
+    /* Recalcular a altura se font-size ou padding mudarem significativamente */
+    height: calc( (0.9rem * 1.5) + ( (var(--espacamento-base) * 0.6) * 2) + 2px );
+  }
 }

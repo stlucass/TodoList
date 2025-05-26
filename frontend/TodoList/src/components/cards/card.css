@@ -1,108 +1,192 @@
-/* Estilos gerais para o corpo (opcional, para melhor visualização) */
-body {
-  font-family: sans-serif;
-  background-color: #f4f7f6;
-  padding: 20px;
-  color: #333;
+/* frontend/TodoList/src/components/cards/card.css */
+.tarefa-card {
+  background-color: var(--cor-superficie);
+  border-radius: var(--border-radius-base);
+  padding: var(--espacamento-base);
+  box-shadow: var(--sombra-leve);
+  transition: var(--transition-base);
+  position: relative;
+  border-left: 4px solid transparent;
+  display: flex; /* Para que o margin-top:auto no rodapé funcione se necessário */
+  flex-direction: column;
 }
 
-.tarefa-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  padding: 20px;
-  transition: box-shadow 0.3s ease-in-out;
+/* ... (regras para .status-pendente, .status-em-andamento, .status-concluida no ::before ou border-left) ... */
+.tarefa-card.status-pendente {
+  border-left-color: var(--cor-status-pendente-borda);
 }
+.tarefa-card.status-em-andamento {
+  border-left-color: var(--cor-status-andamento-borda);
+}
+.tarefa-card.status-concluida {
+  border-left-color: var(--cor-status-concluida-borda);
+}
+
 
 .tarefa-card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-media);
+  border-left-color: var(--cor-amarelo-principal);
 }
 
 .tarefa-cabecalho {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
+  align-items: flex-start;
+  margin-bottom: calc(var(--espacamento-base) * 0.6);
+  padding-left: calc(var(--espacamento-base) * 0.5);
+}
+
+.tarefa-conteudo-principal {
+  flex-grow: 1;
+  margin-right: calc(var(--espacamento-base) * 0.75);
 }
 
 .tarefa-titulo {
-  font-size: 1.4em;
+  font-size: 1.05rem;
+  color: var(--cor-texto-primaria);
+  font-weight: 600;
+  font-family: var(--fonte-titulos);
+  line-height: 1.4;
+  word-break: break-word;
   margin: 0;
-  color: #2c3e50;
 }
 
 .tarefa-status {
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 0.8em;
-  font-weight: bold;
-  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.25em 0.6em;
+  border-radius: 10px;
   text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid;
+  line-height: 1;
+  align-self: flex-start;
 }
 
 .tarefa-status.pendente {
-  background-color: #f39c12; /* Laranja */
+  background-color: var(--cor-status-pendente-bg);
+  color: var(--cor-status-pendente-texto);
+  border-color: var(--cor-status-pendente-borda);
 }
-
 .tarefa-status.em-andamento {
-  background-color: #3498db; /* Azul */
+  background-color: var(--cor-status-andamento-bg);
+  color: var(--cor-status-andamento-texto);
+  border-color: var(--cor-status-andamento-borda);
 }
-
 .tarefa-status.concluida {
-  background-color: #2ecc71; /* Verde */
+  background-color: var(--cor-status-concluida-bg);
+  color: var(--cor-status-concluida-texto);
+  border-color: var(--cor-status-concluida-borda);
 }
 
 .tarefa-descricao {
-  font-size: 1em;
-  line-height: 1.6;
-  color: #555;
-  margin-bottom: 20px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--cor-texto-secundaria);
+  margin-bottom: var(--espacamento-base); /* Espaço entre descrição e container de ações */
+  padding-left: calc(var(--espacamento-base) * 0.5);
+  word-break: break-word;
+  flex-grow: 1; /* Para empurrar ações e rodapé para baixo se a descrição for curta */
 }
 
-.tarefa-rodape {
+/* Novo container para os botões de ação */
+.tarefa-acoes-container {
+  padding-left: calc(var(--espacamento-base) * 0.5); /* Alinha com o conteúdo acima */
+  margin-bottom: calc(var(--espacamento-base) * 0.75); /* Espaço ANTES do rodapé final */
+  margin-top: auto; /* Empurra para baixo se a descrição for curta */
+}
+
+.tarefa-acoes {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9em;
-  color: #7f8c8d;
-}
-
-.tarefa-data-criacao {
-  font-style: italic;
+  justify-content: flex-end; /* Alinha os botões à direita */
+  gap: calc(var(--espacamento-base) * 0.6);
 }
 
 .tarefa-acoes button {
-  background-color: #ecf0f1;
-  border: 1px solid #bdc3c7;
-  color: #2c3e50;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 8px;
-  font-size: 0.9em;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  font-family: var(--fonte-titulos);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: calc(var(--espacamento-base) * 0.45) calc(var(--espacamento-base) * 0.9);
+  border-radius: var(--border-radius-base);
+  transition: var(--transition-rapida);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  min-width: 80px;
+  text-align: center;
 }
 
-.tarefa-acoes button:hover {
-  background-color: #dfe6e9;
-  border-color: #95a5a6;
+.btn-editar {
+  background-color: var(--cor-superficie-elevada);
+  color: var(--cor-azul-acao);
+  border: 1px solid var(--cor-azul-acao);
 }
-
 .btn-editar:hover {
-  border-color: #3498db;
-  color: #3498db;
+  background-color: var(--cor-amarelo-principal);
+  color: var(--cor-amarelo-principal-texto);
+  border-color: var(--cor-amarelo-principal-hover);
+  box-shadow: 0 0 8px rgba(var(--cor-amarelo-principal-rgb), 0.3);
+  transform: translateY(-1px);
 }
 
+.btn-excluir {
+  background-color: var(--cor-superficie-elevada);
+  color: var(--cor-perigo);
+  border: 1px solid var(--cor-perigo);
+}
 .btn-excluir:hover {
-  border-color: #e74c3c;
-  color: #e74c3c;
+  background-color: var(--cor-perigo);
+  color: var(--cor-perigo-texto);
+  border-color: var(--cor-perigo-hover);
+  box-shadow: 0 0 8px rgba(var(--cor-perigo-rgb), 0.3);
+  transform: translateY(-1px);
 }
 
-.container-de-tarefas {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+
+.tarefa-rodape { /* Agora este é o último elemento, com a data */
+  display: flex;
+  justify-content: flex-start; /* Alinha a data à esquerda */
+  align-items: center;
+  font-size: 0.7rem;
+  color: var(--cor-texto-desabilitado);
+  padding-top: calc(var(--espacamento-base) * 0.6);
+  border-top: 1px solid var(--cor-borda); /* Linha divisória aqui */
+  padding-left: calc(var(--espacamento-base) * 0.5); /* Alinha com o conteúdo acima */
+  margin-top: 0; /* Não precisa mais de margin-top: auto aqui */
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .tarefa-card {
+    padding: calc(var(--espacamento-base) * 0.8);
+    border-left-width: 3px;
+  }
+  .tarefa-cabecalho {
+    padding-left: calc(var(--espacamento-base) * 0.25);
+    /* ... (outros estilos responsivos do cabeçalho se necessário) ... */
+  }
+  .tarefa-descricao, .tarefa-acoes-container, .tarefa-rodape { /* Ajuste de padding para todos */
+    padding-left: calc(var(--espacamento-base) * 0.25);
+  }
+  .tarefa-titulo {
+    font-size: 1rem;
+  }
+  
+  .tarefa-acoes-container {
+    margin-bottom: calc(var(--espacamento-base) * 0.6);
+  }
+  .tarefa-acoes {
+    justify-content: flex-start; /* Botões à esquerda em mobile */
+    /* Se quiser que ocupem a largura toda e empilhem, precisaria de mais ajustes */
+  }
+  .tarefa-acoes button {
+    padding: calc(var(--espacamento-base) * 0.6) calc(var(--espacamento-base) * 0.8);
+    font-size: 0.75rem;
+    min-width: 70px;
+  }
+
+  .tarefa-rodape { /* Rodapé já está configurado para empilhar implicitamente se a data for o único item */
+    padding-top: calc(var(--espacamento-base) * 0.5);
+  }
 }

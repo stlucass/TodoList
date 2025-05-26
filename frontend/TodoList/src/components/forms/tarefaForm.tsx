@@ -48,18 +48,15 @@ export function TarefaForm({ tarefaParaEditar, onCancelEdit, onFormSubmitSuccess
     }
   }, [tarefaParaEditar]);
 
-  // CORREÇÃO PRINCIPAL AQUI:
   const mutation = useMutation<
-    TarefaData, // Tipo do retorno de onSuccess
-    Error,      // Tipo do erro
-    TarefaCreateFormData | TarefaUpdateFormData // Tipo do argumento para mutation.mutate()
+    TarefaData,
+    Error,
+    TarefaCreateFormData | TarefaUpdateFormData
   >({
-    mutationFn: (formData) => { // formData pode ser TarefaCreateFormData OU TarefaUpdateFormData
+    mutationFn: (formData) => {
       if (isEditing) {
-        // Se está editando, formData DEVE ser TarefaUpdateFormData
         return updateTarefa(formData as TarefaUpdateFormData);
       } else {
-        // Se está criando, formData DEVE ser TarefaCreateFormData
         return postTarefa(formData as TarefaCreateFormData);
       }
     },
@@ -99,14 +96,14 @@ export function TarefaForm({ tarefaParaEditar, onCancelEdit, onFormSubmitSuccess
         descricao,
         status,
       };
-      mutation.mutate(tarefaAtualizada); // Linha 103 no seu código original era similar a esta
+      mutation.mutate(tarefaAtualizada);
     } else {
       const novaTarefa: TarefaCreateFormData = {
         titulo,
         descricao,
         status,
       };
-      mutation.mutate(novaTarefa); // Ou esta linha
+      mutation.mutate(novaTarefa);
     }
   };
 
@@ -130,14 +127,28 @@ export function TarefaForm({ tarefaParaEditar, onCancelEdit, onFormSubmitSuccess
         </select>
       </div>
 
-      <button type="submit" disabled={mutation.isPending}>
-        {mutation.isPending ? (isEditing ? 'Salvando...' : 'Criando...') : (isEditing ? 'Salvar Alterações' : 'Criar Tarefa')}
-      </button>
-      {isEditing && (
-        <button type="button" onClick={onCancelEdit} disabled={mutation.isPending} style={{ marginLeft: '10px', backgroundColor: '#f0ad4e' }}>
-          Cancelar Edição
-        </button>
-      )}
+<div className="form-actions">
+  <button 
+    type="submit" 
+    className="btn-azul" // Classe para o estilo amarelo que definimos
+    disabled={mutation.isPending}
+  >
+    {/* Este é o texto do botão. Verifique se está correto. */}
+    {mutation.isPending 
+      ? (isEditing ? 'Salvando...' : 'Criando...') 
+      : (isEditing ? 'Salvar Alterações' : 'Criar Tarefa')} 
+  </button>
+  {isEditing && (
+    <button 
+      type="button" 
+      className="btn-cinza" // Classe para o botão de cancelar
+      onClick={onCancelEdit} 
+      disabled={mutation.isPending}
+    >
+      Cancelar Edição
+    </button>
+  )}
+</div>
       {mutation.isError && (
         <p className="error-message">
           {isEditing ? 'Erro ao atualizar tarefa' : 'Erro ao criar tarefa'}:

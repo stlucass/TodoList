@@ -4,8 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Enumerated; // Importe esta anotação
-import jakarta.persistence.EnumType;   // Importe esta anotação
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
 import java.time.LocalDate;
 
 @Entity
@@ -17,8 +17,8 @@ public class Tarefa {
     private String titulo;
     private String descricao;
 
-    @Enumerated(EnumType.STRING) // Armazena o enum como String no DB
-    private StatusTarefa status; // O tipo do campo agora é o seu Enum StatusTarefa
+    @Enumerated(EnumType.STRING)
+    private StatusTarefa status;
 
     private LocalDate dataCriacao;
 
@@ -49,11 +49,11 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public StatusTarefa getStatus() { // Getter agora retorna StatusTarefa
+    public StatusTarefa getStatus() {
         return status;
     }
 
-    public void setStatus(StatusTarefa status) { // Setter agora aceita StatusTarefa
+    public void setStatus(StatusTarefa status) {
         this.status = status;
     }
 

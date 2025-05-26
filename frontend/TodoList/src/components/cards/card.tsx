@@ -1,36 +1,31 @@
-import './card.css'; // Certifique-se que este arquivo existe na mesma pasta
+import './card.css';
+import type { TarefaData } from '../../interface/tarefaData'; // Ajuste o caminho se necessário
 
 interface CardProps {
-  // O 'id' não é usado diretamente para renderização no Card, mas é passado como 'key' pelo App.tsx
-  titulo: string | null | undefined;
-  descricao?: string | null | undefined; // Descrição pode ser opcional ou nula
-  status: string | null | undefined;
-  dataCriacao: string | null | undefined;
+  tarefa: TarefaData;
+  onEdit: (tarefa: TarefaData) => void;
+  onDelete: (tarefaId: number) => void; // Nova prop para exclusão
 }
 
-export function Card({ titulo, descricao, status, dataCriacao }: CardProps) {
-  // Tratamento para o título
-  const displayTitulo = titulo || 'Título Indisponível';
+export function Card({ tarefa, onEdit, onDelete }: CardProps) {
+  const { id, titulo, descricao, status, dataCriacao } = tarefa; // 'id' é necessário para onDelete
 
-  // Tratamento para o status
+  // Tratamento para o status (como na versão robusta anterior)
   let statusText = 'Indefinido';
-  let statusClass = 'indefinido'; // Classe CSS padrão para status indefinido
-
+  let statusClass = 'indefinido';
   if (typeof status === 'string' && status.trim() !== '') {
     statusText = status.replace('_', ' ');
     statusClass = status.toLowerCase().replace('_', '-');
   } else if (status) {
-    // Caso status seja um número ou outro tipo (improvável, mas para ser seguro)
     statusText = String(status);
     statusClass = String(status).toLowerCase();
   }
 
-  // Tratamento para a data de criação
+  // Tratamento para a data de criação (como na versão robusta anterior)
   let dataFormatada = '';
   if (typeof dataCriacao === 'string' && dataCriacao.trim() !== '') {
     try {
       const dateObj = new Date(dataCriacao);
-      // Verifica se a data é válida
       if (!isNaN(dateObj.getTime())) {
         dataFormatada = dateObj.toLocaleDateString('pt-BR', {
           day: '2-digit',
@@ -38,42 +33,48 @@ export function Card({ titulo, descricao, status, dataCriacao }: CardProps) {
           year: 'numeric',
         });
       } else {
-        console.warn(`[Card.tsx] dataCriacao recebida é uma string inválida para data: "${dataCriacao}" para o título: "${displayTitulo}"`);
         dataFormatada = 'Data Inválida';
       }
     } catch (e) {
-      console.error(`[Card.tsx] Erro ao processar dataCriacao: "${dataCriacao}" para o título: "${displayTitulo}"`, e);
       dataFormatada = 'Erro na Data';
     }
-  } else if (dataCriacao) {
-    // Se dataCriacao não for string mas for "truthy" (improvável para este caso)
-     console.warn(`[Card.tsx] dataCriacao recebida não é uma string válida:`, dataCriacao, `para o título: "${displayTitulo}"`);
   }
 
+  const handleEditClick = () => {
+    onEdit(tarefa);
+  };
+
+  const handleDeleteClick = () => {
+    if (id === undefined || id === null) { // Verificação de segurança
+        console.error("ID da tarefa é indefinido, não é possível excluir.");
+        alert("Erro: ID da tarefa não encontrado.");
+        return;
+    }
+    onDelete(id); // Chama a função onDelete passada pelo App.tsx com o ID da tarefa
+  };
 
   return (
     <div className="tarefa-card-individual">
       <div className="tarefa-cabecalho">
-        <h3 className="tarefa-titulo">{displayTitulo}</h3>
+        <h3 className="tarefa-titulo">{titulo || 'Título Indisponível'}</h3>
         <span className={`tarefa-status ${statusClass}`}>
           {statusText}
         </span>
       </div>
 
-      {/* Renderiza a descrição apenas se ela existir e não for uma string vazia */}
       {(typeof descricao === 'string' && descricao.trim() !== '') && (
         <p className="tarefa-descricao">{descricao}</p>
       )}
 
       <div className="tarefa-rodape">
-        {dataFormatada && ( // Renderiza a data apenas se dataFormatada tiver um valor
+        {dataFormatada && (
           <span className="tarefa-data-criacao">
             Criada em: {dataFormatada}
           </span>
         )}
         <div className="tarefa-acoes">
-          <button className="btn-editar">Editar</button>
-          <button className="btn-excluir">Excluir</button>
+          <button className="btn-editar" onClick={handleEditClick}>Editar</button>
+          <button className="btn-excluir" onClick={handleDeleteClick}>Excluir</button>
         </div>
       </div>
     </div>

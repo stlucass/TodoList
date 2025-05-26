@@ -1,0 +1,103 @@
+/* Estilos para TarefaForm.css */
+
+/* Container do formulário - inspirado no .tarefa-card */
+.tarefa-form {
+  background-color: #fff; /* Fundo branco como o card */
+  border-radius: 8px; /* Mesmo border-radius do card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Mesma sombra do card */
+  margin-bottom: 30px; /* Aumentei a margem inferior para separar bem da lista */
+  padding: 25px; /* Padding similar ao card */
+  max-width: 500px; /* Limita a largura máxima do formulário */
+  margin-left: auto; /* Centraliza o formulário se houver espaço */
+  margin-right: auto; /* Centraliza o formulário se houver espaço */
+}
+
+.tarefa-form h2 {
+  text-align: center;
+  color: #2c3e50; /* Cor similar ao .tarefa-titulo */
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 1.5em;
+}
+
+.form-group {
+  margin-bottom: 18px; /* Espaçamento entre os grupos de campos */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #34495e; /* Um pouco mais escuro para os labels */
+  font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px; /* Padding interno dos campos */
+  border: 1px solid #bdc3c7; /* Borda similar aos botões do card */
+  border-radius: 4px; /* Mesmo border-radius dos botões do card */
+  box-sizing: border-box;
+  font-size: 1em;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #3498db; /* Cor de destaque no foco (azul dos status) */
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2); /* Sombra sutil no foco */
+  outline: none;
+}
+
+.form-group textarea {
+  min-height: 100px; /* Altura mínima para a área de descrição */
+  resize: vertical; /* Permite redimensionamento vertical */
+}
+
+.tarefa-form button[type="submit"] {
+  display: block; /* Faz o botão ocupar a largura disponível se não tiver outra configuração */
+  width: 100%; /* Botão com largura total */
+  background-color: #2ecc71; /* Verde do status 'concluida', para ação positiva */
+  color: white;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; /* Espaço acima do botão */
+}
+
+.tarefa-form button[type="submit"]:hover {
+  background-color: #27ae60; /* Verde um pouco mais escuro no hover */
+}
+
+.tarefa-form button[type="submit"]:disabled {
+  background-color: #95a5a6; /* Cor para botão desabilitado */
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #e74c3c; /* Vermelho para mensagens de erro (cor do btn-excluir:hover) */
+  font-size: 0.9em;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Ajustes no body para garantir que o formulário e os cards fiquem bem (opcional)
+   Estes estilos de body já foram fornecidos por você.
+   Se eles estiverem em um arquivo CSS global (como index.css ou App.css),
+   não precisa repeti-los aqui.
+*/
+
+body {
+  font-family: sans-serif;
+  background-color: #f4f7f6;
+  padding: 20px;
+  color: #333;
+}

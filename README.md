@@ -6,7 +6,7 @@ Este projeto é uma aplicação Full Stack de Lista de Tarefas, consistindo em u
 
 O repositório está organizado da seguinte forma:
 
-
+.
 ├── backend/
 │   ├── src/                     # Código fonte Java/Spring Boot
 │   ├── pom.xml                  # Dependências e build do backend (Maven)
@@ -19,7 +19,7 @@ O repositório está organizado da seguinte forma:
 │       ├── vite.config.ts       # Configuração do Vite
 │       ├── nginx.conf           # Configuração do Nginx para servir o frontend
 │       └── Dockerfile           # Instruções para containerizar o frontend
-├── .gitignore                   # Arquivos ignorados pelo Git
+├── .gitignore                   # Arquivos ignorados pelo Git (exemplo, você precisará criar o seu)
 ├── docker-compose.yml           # Orquestração dos contêineres Docker
 └── README.md                    # Este arquivo
 

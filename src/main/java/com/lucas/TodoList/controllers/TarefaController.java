@@ -2,9 +2,8 @@ package com.lucas.TodoList.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-import java.util.Optional;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import com.lucas.TodoList.exceptions.RecursoNaoEncontradoException;
 import com.lucas.TodoList.model.Tarefa;
 import com.lucas.TodoList.services.TarefaService;
 
@@ -34,10 +33,15 @@ public class TarefaController {
 
     // Endpoint para buscar uma tarefa por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Tarefa> buscarTarefa(@PathVariable Long id) {
-            return tarefaService.buscarTarefaPorId(id)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<?> buscarTarefa(@PathVariable Long id) {
+            try{
+                Tarefa tarefa = tarefaService.buscarTarefaPorId(id);
+                return ResponseEntity.ok(tarefa);
+            }
+            catch(RecursoNaoEncontradoException e){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+
+            }
     }
 
     // Endpoint para criar uma nova tarefa
@@ -60,12 +64,11 @@ public class TarefaController {
     // Endpoint para deletar uma tarefa existente
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarTarefa(@PathVariable Long id) {
-        Optional<Tarefa> tarefa = tarefaService.buscarTarefaPorId(id);
-        if (tarefa.isPresent()) {
+        try {
             tarefaService.deletarTarefa(id);
             return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
+        } catch (RecursoNaoEncontradoException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 se não encontrar
         }
     }
 }

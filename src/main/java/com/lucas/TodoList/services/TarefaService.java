@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+
+import com.lucas.TodoList.exceptions.RecursoNaoEncontradoException;
 import com.lucas.TodoList.model.Tarefa;
 import com.lucas.TodoList.repositories.TarefaRepository;
 
@@ -16,8 +18,9 @@ public class TarefaService {
     public List<Tarefa> listarTarefas() {
         return tarefaRepository.findAll();
     }
-    public Optional<Tarefa> buscarTarefaPorId(Long id) {
-        return tarefaRepository.findById(id);
+     public Tarefa buscarTarefaPorId(Long id) { // Não retorna Optional, lança exceção
+        return tarefaRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Tarefa não encontrada com ID: " + id));
     }
 
     public Tarefa criarTarefa(Tarefa tarefa) {
@@ -42,6 +45,9 @@ public class TarefaService {
         }
     }
     public void deletarTarefa(Long id) {
+        if(!tarefaRepository.existsById(id)){
+            throw new RecursoNaoEncontradoException("Tarefa com ID " + id + " não encontrada")
+        }
         tarefaRepository.deleteById(id);
     }
     

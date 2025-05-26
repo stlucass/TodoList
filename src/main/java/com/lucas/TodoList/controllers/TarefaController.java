@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.lucas.TodoList.exceptions.RecursoNaoEncontradoException;
-import com.lucas.TodoList.model.Enums.StatusTarefa;
+import com.lucas.TodoList.model.StatusTarefa.StatusTarefa;
 import com.lucas.TodoList.model.Tarefa;
 import com.lucas.TodoList.services.TarefaService;
 

@@ -3,9 +3,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
-
 import com.lucas.TodoList.exceptions.RecursoNaoEncontradoException;
-import com.lucas.TodoList.model.Enums.StatusTarefa;
+import com.lucas.TodoList.model.StatusTarefa;
 import com.lucas.TodoList.model.Tarefa;
 import com.lucas.TodoList.repositories.TarefaRepository;
 
@@ -44,7 +43,7 @@ public class TarefaService {
     }
     public void deletarTarefa(Long id) {
         if(!tarefaRepository.existsById(id)){
-            throw new RecursoNaoEncontradoException("Tarefa com ID " + id + " não encontrada")
+            throw new RecursoNaoEncontradoException("Tarefa com ID " + id + " não encontrada");
         }
         tarefaRepository.deleteById(id);
     }

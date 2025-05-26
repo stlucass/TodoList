@@ -8,8 +8,6 @@ import jakarta.persistence.Enumerated; // Importe esta anotação
 import jakarta.persistence.EnumType;   // Importe esta anotação
 import java.time.LocalDate;
 
-import com.lucas.TodoList.model.Enums.StatusTarefa; // Importe o seu Enum
-
 @Entity
 public class Tarefa {
 

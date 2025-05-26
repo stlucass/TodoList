@@ -1,4 +1,3 @@
-// frontend/TodoList/src/components/cards/card.tsx
 import type { TarefaData } from '../../interface/tarefaData'; //
 import './card.css'; //
 
@@ -18,7 +17,7 @@ export function Card({ tarefa, onEdit, onDelete }: CardProps) {
   if (typeof status === 'string' && status.trim() !== '') {
     statusText = status.replace('_', ' ');
     statusBadgeClass = status.toLowerCase().replace('_', '-');
-    
+
     if (status === 'PENDENTE') {
       cardStatusClass = 'status-pendente';
     } else if (status === 'EM_ANDAMENTO') {
@@ -55,9 +54,9 @@ export function Card({ tarefa, onEdit, onDelete }: CardProps) {
 
   const handleDeleteClick = () => {
     if (id === undefined || id === null) {
-        console.error("ID da tarefa é indefinido, não é possível excluir.");
-        alert("Erro: ID da tarefa não encontrado.");
-        return;
+      console.error("ID da tarefa é indefinido, não é possível excluir.");
+      alert("Erro: ID da tarefa não encontrado.");
+      return;
     }
     onDelete(id);
   };
@@ -72,27 +71,24 @@ export function Card({ tarefa, onEdit, onDelete }: CardProps) {
           {statusText}
         </span>
       </div>
-      
+
       {(typeof descricao === 'string' && descricao.trim() !== '') && (
         <p className="tarefa-descricao">{descricao}</p>
       )}
 
-      {/* BOTÕES DE AÇÃO VÊM ANTES DO RODAPÉ FINAL */}
-      <div className="tarefa-acoes-container"> {/* Novo container para ações se precisar de espaçamento específico */}
+      <div className="tarefa-acoes-container">
         <div className="tarefa-acoes">
           <button className="btn-editar" onClick={handleEditClick}>Editar</button>
           <button className="btn-excluir" onClick={handleDeleteClick}>Excluir</button>
         </div>
       </div>
 
-      {/* RODAPÉ COM A DATA E A LINHA DIVISÓRIA */}
       <div className="tarefa-rodape">
         {dataFormatada && (
           <span className="tarefa-data-criacao">
             Criada em: {dataFormatada}
           </span>
         )}
-        {/* Se houver outros elementos no rodapé além da data, coloque-os aqui ou remova a data se não for mais necessária no rodapé */}
       </div>
     </div>
   );

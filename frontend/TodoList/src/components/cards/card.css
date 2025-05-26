@@ -1,4 +1,3 @@
-/* frontend/TodoList/src/components/cards/card.css */
 .tarefa-card {
   background-color: var(--cor-superficie);
   border-radius: var(--border-radius-base);
@@ -7,17 +6,18 @@
   transition: var(--transition-base);
   position: relative;
   border-left: 4px solid transparent;
-  display: flex; /* Para que o margin-top:auto no rodapé funcione se necessário */
+  display: flex;
   flex-direction: column;
 }
 
-/* ... (regras para .status-pendente, .status-em-andamento, .status-concluida no ::before ou border-left) ... */
 .tarefa-card.status-pendente {
   border-left-color: var(--cor-status-pendente-borda);
 }
+
 .tarefa-card.status-em-andamento {
   border-left-color: var(--cor-status-andamento-borda);
 }
+
 .tarefa-card.status-concluida {
   border-left-color: var(--cor-status-concluida-borda);
 }
@@ -69,11 +69,13 @@
   color: var(--cor-status-pendente-texto);
   border-color: var(--cor-status-pendente-borda);
 }
+
 .tarefa-status.em-andamento {
   background-color: var(--cor-status-andamento-bg);
   color: var(--cor-status-andamento-texto);
   border-color: var(--cor-status-andamento-borda);
 }
+
 .tarefa-status.concluida {
   background-color: var(--cor-status-concluida-bg);
   color: var(--cor-status-concluida-texto);
@@ -84,22 +86,21 @@
   font-size: 0.9rem;
   line-height: 1.55;
   color: var(--cor-texto-secundaria);
-  margin-bottom: var(--espacamento-base); /* Espaço entre descrição e container de ações */
+  margin-bottom: var(--espacamento-base);
   padding-left: calc(var(--espacamento-base) * 0.5);
   word-break: break-word;
-  flex-grow: 1; /* Para empurrar ações e rodapé para baixo se a descrição for curta */
+  flex-grow: 1;
 }
 
-/* Novo container para os botões de ação */
 .tarefa-acoes-container {
-  padding-left: calc(var(--espacamento-base) * 0.5); /* Alinha com o conteúdo acima */
-  margin-bottom: calc(var(--espacamento-base) * 0.75); /* Espaço ANTES do rodapé final */
-  margin-top: auto; /* Empurra para baixo se a descrição for curta */
+  padding-left: calc(var(--espacamento-base) * 0.5);
+  margin-bottom: calc(var(--espacamento-base) * 0.75);
+  margin-top: auto;
 }
 
 .tarefa-acoes {
   display: flex;
-  justify-content: flex-end; /* Alinha os botões à direita */
+  justify-content: flex-end;
   gap: calc(var(--espacamento-base) * 0.6);
 }
 
@@ -122,6 +123,7 @@
   color: var(--cor-azul-acao);
   border: 1px solid var(--cor-azul-acao);
 }
+
 .btn-editar:hover {
   background-color: var(--cor-amarelo-principal);
   color: var(--cor-amarelo-principal-texto);
@@ -135,6 +137,7 @@
   color: var(--cor-perigo);
   border: 1px solid var(--cor-perigo);
 }
+
 .btn-excluir:hover {
   background-color: var(--cor-perigo);
   color: var(--cor-perigo-texto);
@@ -144,49 +147,53 @@
 }
 
 
-.tarefa-rodape { /* Agora este é o último elemento, com a data */
+.tarefa-rodape {
   display: flex;
-  justify-content: flex-start; /* Alinha a data à esquerda */
+  justify-content: flex-start;
   align-items: center;
   font-size: 0.7rem;
   color: var(--cor-texto-desabilitado);
   padding-top: calc(var(--espacamento-base) * 0.6);
-  border-top: 1px solid var(--cor-borda); /* Linha divisória aqui */
-  padding-left: calc(var(--espacamento-base) * 0.5); /* Alinha com o conteúdo acima */
-  margin-top: 0; /* Não precisa mais de margin-top: auto aqui */
+  border-top: 1px solid var(--cor-borda);
+  padding-left: calc(var(--espacamento-base) * 0.5);
+  margin-top: 0;
 }
 
-/* Responsividade */
 @media (max-width: 480px) {
   .tarefa-card {
     padding: calc(var(--espacamento-base) * 0.8);
     border-left-width: 3px;
   }
+
   .tarefa-cabecalho {
     padding-left: calc(var(--espacamento-base) * 0.25);
-    /* ... (outros estilos responsivos do cabeçalho se necessário) ... */
   }
-  .tarefa-descricao, .tarefa-acoes-container, .tarefa-rodape { /* Ajuste de padding para todos */
+
+  .tarefa-descricao,
+  .tarefa-acoes-container,
+  .tarefa-rodape {
     padding-left: calc(var(--espacamento-base) * 0.25);
   }
+
   .tarefa-titulo {
     font-size: 1rem;
   }
-  
+
   .tarefa-acoes-container {
     margin-bottom: calc(var(--espacamento-base) * 0.6);
   }
+
   .tarefa-acoes {
-    justify-content: flex-start; /* Botões à esquerda em mobile */
-    /* Se quiser que ocupem a largura toda e empilhem, precisaria de mais ajustes */
+    justify-content: flex-start;
   }
+
   .tarefa-acoes button {
     padding: calc(var(--espacamento-base) * 0.6) calc(var(--espacamento-base) * 0.8);
     font-size: 0.75rem;
     min-width: 70px;
   }
 
-  .tarefa-rodape { /* Rodapé já está configurado para empilhar implicitamente se a data for o único item */
+  .tarefa-rodape {
     padding-top: calc(var(--espacamento-base) * 0.5);
   }
 }

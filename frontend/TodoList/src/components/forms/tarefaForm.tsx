@@ -127,28 +127,27 @@ export function TarefaForm({ tarefaParaEditar, onCancelEdit, onFormSubmitSuccess
         </select>
       </div>
 
-<div className="form-actions">
-  <button 
-    type="submit" 
-    className="btn-azul" // Classe para o estilo amarelo que definimos
-    disabled={mutation.isPending}
-  >
-    {/* Este é o texto do botão. Verifique se está correto. */}
-    {mutation.isPending 
-      ? (isEditing ? 'Salvando...' : 'Criando...') 
-      : (isEditing ? 'Salvar Alterações' : 'Criar Tarefa')} 
-  </button>
-  {isEditing && (
-    <button 
-      type="button" 
-      className="btn-cinza" // Classe para o botão de cancelar
-      onClick={onCancelEdit} 
-      disabled={mutation.isPending}
-    >
-      Cancelar Edição
-    </button>
-  )}
-</div>
+      <div className="form-actions">
+        <button
+          type="submit"
+          className="btn-azul"
+          disabled={mutation.isPending}
+        >
+          {mutation.isPending
+            ? (isEditing ? 'Salvando...' : 'Criando...')
+            : (isEditing ? 'Salvar Alterações' : 'Criar Tarefa')}
+        </button>
+        {isEditing && (
+          <button
+            type="button"
+            className="btn-cinza"
+            onClick={onCancelEdit}
+            disabled={mutation.isPending}
+          >
+            Cancelar Edição
+          </button>
+        )}
+      </div>
       {mutation.isError && (
         <p className="error-message">
           {isEditing ? 'Erro ao atualizar tarefa' : 'Erro ao criar tarefa'}:

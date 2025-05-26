@@ -16,10 +16,10 @@
   --cor-amarelo-principal-texto: #1E1F20;
   --cor-amarelo-principal-rgb: 255, 193, 7;
 
-  --cor-cinza-acao: #546E7A; /* Um pouco mais escuro para melhor contraste como botão */
+  --cor-cinza-acao: #546E7A;
   --cor-cinza-acao-hover: #455A64;
   --cor-cinza-acao-texto: #ECEFF1;
-  --cor-azul-acao: #0D6EFD; /* Exemplo de azul Bootstrap */
+  --cor-azul-acao: #0D6EFD;
   --cor-azul-acao-hover: #0B5ED7;
   --cor-azul-acao-texto: #FFFFFF;
 
@@ -28,9 +28,9 @@
   --cor-perigo-texto: #FFFFFF;
   --cor-perigo-rgb: 229, 57, 53;
 
-  --cor-status-pendente-texto: var(--cor-perigo); /* Usando a variável de perigo (vermelho) */
-  --cor-status-pendente-bg: rgba(var(--cor-perigo-rgb), 0.1); /* Fundo sutil vermelho */
-  --cor-status-pendente-borda: rgba(var(--cor-perigo-rgb), 0.6); /* Borda vermelha */
+  --cor-status-pendente-texto: var(--cor-perigo);
+  --cor-status-pendente-bg: rgba(var(--cor-perigo-rgb), 0.1);
+  --cor-status-pendente-borda: rgba(var(--cor-perigo-rgb), 0.6);
 
   --cor-status-andamento-texto: #4FC3F7;
   --cor-status-andamento-bg: rgba(79, 195, 247, 0.1);
@@ -45,7 +45,7 @@
 
   --fonte-titulos: 'Poppins', sans-serif;
   --fonte-corpo: 'Inter', sans-serif;
-  --border-radius-base: 6px; /* Reduzido para um look mais clean */
+  --border-radius-base: 6px;
   --border-radius-grande: 10px;
   --transition-base: all 0.2s ease-out;
   --espacamento-base: 1rem;
@@ -119,7 +119,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--cor-amarelo-principal);
-  background-color: var(--cor-superficie); /* Leve mudança no foco */
+  background-color: var(--cor-superficie);
   box-shadow: 0 0 0 3px rgba(var(--cor-amarelo-principal-rgb), 0.15);
 }
 

@@ -33,23 +33,10 @@ public class TarefaController {
         this.tarefaService = tarefaService;
     }
 
-   
+   // Endpoint para listar todas as tarefas
     @GetMapping()
     public List<Tarefa> listarTarefas() {
         return tarefaService.listarTarefas();
-    }
-
-    // Endpoint para buscar uma tarefa por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<?> buscarTarefa(@PathVariable Long id) {
-            try{
-                Tarefa tarefa = tarefaService.buscarTarefaPorId(id);
-                return ResponseEntity.ok(tarefa);
-            }
-            catch(RecursoNaoEncontradoException e){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-
-            }
     }
 
     // Endpoint para criar uma nova tarefa
@@ -60,7 +47,7 @@ public class TarefaController {
     return tarefaService.criarTarefa(tarefa);
     }
 
-    // ENDPOINT PARA ATUALIZAR UMA TAREFA (PUT) 
+    // Endpoint para atualizar uma tarefa
     @PutMapping("/{id}")
     public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @RequestBody Tarefa tarefaComNovosDados) {
         Tarefa tarefaSalva = tarefaService.atualizarTarefa(id, tarefaComNovosDados);
@@ -71,14 +58,14 @@ public class TarefaController {
         }
     }
 
-    // Endpoint para deletar uma tarefa existente
+    // Endpoint para deletar uma tarefa
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarTarefa(@PathVariable Long id) {
         try {
             tarefaService.deletarTarefa(id);
             return ResponseEntity.noContent().build();
         } catch (RecursoNaoEncontradoException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 se não encontrar
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
     // Endpoint para buscar tarefas por status

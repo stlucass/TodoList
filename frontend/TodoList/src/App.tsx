@@ -60,13 +60,13 @@ function App() {
     <div className="container">
       <h1>Lista de Tarefas</h1>
 
-      <div className="app-controles"> {/* NOVO WRAPPER */}
+      <div className="app-controles">
         <TarefaForm
           tarefaParaEditar={tarefaEmEdicao}
           onCancelEdit={handleCancelEdit}
           onFormSubmitSuccess={handleFormSubmitSuccess}
         />
-        <div className="filtro-container"> {/* O filtro já tem seu container */}
+        <div className="filtro-container">
           <label htmlFor="filtro-status">Filtrar por Status:</label>
           <select id="filtro-status" value={statusFiltroSelecionado} onChange={handleFiltroChange}>
             <option value="TODOS">Todos</option>

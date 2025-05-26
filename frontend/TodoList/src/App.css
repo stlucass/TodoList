@@ -1,29 +1,31 @@
-/* frontend/TodoList/src/App.css */
 .container {
   width: 100%;
-  max-width: 700px; /* Largura máxima para o conteúdo principal */
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
   padding: calc(var(--espacamento-base) * 2) calc(var(--espacamento-base) * 1.5);
 }
+
 .btn-azul {
   background-color: var(--cor-azul-acao);
   color: var(--cor-azul-acao-texto);
 }
+
 .btn-azul:hover {
   background-color: var(--cor-azul-acao-hover);
   box-shadow: var(--sombra-leve);
 }
-.container > h1 {
+
+.container>h1 {
   text-align: center;
   color: var(--cor-texto-primaria);
-  font-size: 2.2rem; /* Tamanho ajustado */
+  font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: calc(var(--espacamento-base) * 2);
   letter-spacing: -0.5px;
 }
 
-.app-controles { /* Wrapper para formulário e filtro */
+.app-controles {
   display: flex;
   flex-direction: column;
   gap: calc(var(--espacamento-base) * 1.5);
@@ -33,9 +35,10 @@
 .filtro-container {
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Filtro à direita em telas maiores */
+  justify-content: flex-end;
   gap: var(--espacamento-base);
-  padding: calc(var(--espacamento-base) * 0.5) 0; /* Menos padding vertical */
+  padding: calc(var(--espacamento-base) * 0.5) 0;
+
 }
 
 .filtro-container label {
@@ -53,8 +56,8 @@
 
 .card-container {
   display: grid;
-  grid-template-columns: 1fr; /* Uma coluna por padrão */
-  gap: var(--espacamento-base); /* Espaçamento entre cards */
+  grid-template-columns: 1fr;
+  gap: var(--espacamento-base);
 }
 
 .mensagem-feedback {
@@ -67,31 +70,35 @@
   margin-top: var(--espacamento-base);
 }
 
-/* Responsividade Geral */
 @media (max-width: 768px) {
   .container {
     padding: calc(var(--espacamento-base) * 1.5) var(--espacamento-base);
   }
-  .container > h1 {
+
+  .container>h1 {
     font-size: 1.8rem;
     margin-bottom: calc(var(--espacamento-base) * 1.5);
   }
+
   .filtro-container {
-    justify-content: flex-start; /* Filtro à esquerda em telas menores */
+    justify-content: flex-start;
   }
+
   .filtro-container select {
-    flex-grow: 1; /* Select ocupa mais espaço */
+    flex-grow: 1;
     max-width: none;
   }
 }
 
 @media (max-width: 480px) {
   html {
-    font-size: 15px; /* Reduz a base da fonte em telas muito pequenas */
+    font-size: 15px;
   }
-  .container > h1 {
+
+  .container>h1 {
     font-size: 1.6rem;
   }
+
   .app-controles {
     gap: var(--espacamento-base);
     margin-bottom: var(--espacamento-base);

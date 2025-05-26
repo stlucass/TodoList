@@ -1,6 +1,7 @@
 package com.lucas.TodoList.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.lucas.TodoList.exceptions.RecursoNaoEncontradoException;
+import com.lucas.TodoList.model.Enums.StatusTarefa;
 import com.lucas.TodoList.model.Tarefa;
 import com.lucas.TodoList.services.TarefaService;
 
@@ -70,5 +72,10 @@ public class TarefaController {
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 se não encontrar
         }
+    }
+    // Endpoint para buscar tarefas por status
+     @GetMapping("/status")
+    public List<Tarefa> buscarTarefasPorStatus(@RequestParam StatusTarefa status) {
+        return tarefaService.buscarTarefasPorStatus(status);
     }
 }

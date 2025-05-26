@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.lucas.TodoList.exceptions.RecursoNaoEncontradoException;
+import com.lucas.TodoList.model.Enums.StatusTarefa;
 import com.lucas.TodoList.model.Tarefa;
 import com.lucas.TodoList.repositories.TarefaRepository;
 
@@ -18,7 +19,7 @@ public class TarefaService {
     public List<Tarefa> listarTarefas() {
         return tarefaRepository.findAll();
     }
-     public Tarefa buscarTarefaPorId(Long id) { // Não retorna Optional, lança exceção
+     public Tarefa buscarTarefaPorId(Long id) {	
         return tarefaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Tarefa não encontrada com ID: " + id));
     }
@@ -32,15 +33,12 @@ public class TarefaService {
 
         if (optionalTarefa.isPresent()) {
             Tarefa tarefaExistente = optionalTarefa.get();
-
-            // Atualiza os campos fornecidos
             tarefaExistente.setTitulo(tarefaAtualizada.getTitulo());
             tarefaExistente.setDescricao(tarefaAtualizada.getDescricao());
-            tarefaExistente.setStatus(tarefaAtualizada.getStatus()); // Atualiza o status
+            tarefaExistente.setStatus(tarefaAtualizada.getStatus());
 
             return tarefaRepository.save(tarefaExistente);
         } else {
-            // Se a tarefa não for encontrada, retorne null ou lance uma exceção
             return null;
         }
     }
@@ -49,6 +47,9 @@ public class TarefaService {
             throw new RecursoNaoEncontradoException("Tarefa com ID " + id + " não encontrada")
         }
         tarefaRepository.deleteById(id);
+    }
+     public List<Tarefa> buscarTarefasPorStatus(StatusTarefa status) {
+        return tarefaRepository.findByStatus(status);
     }
     
 }

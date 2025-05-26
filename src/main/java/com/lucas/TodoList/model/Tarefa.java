@@ -8,6 +8,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 import java.time.LocalDate;
 
+
 @Entity
 public class Tarefa {
 

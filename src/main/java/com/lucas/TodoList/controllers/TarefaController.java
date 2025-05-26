@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,13 +19,15 @@ import com.lucas.TodoList.exceptions.RecursoNaoEncontradoException;
 import com.lucas.TodoList.model.StatusTarefa;
 import com.lucas.TodoList.model.Tarefa;
 import com.lucas.TodoList.services.TarefaService;
-
+import org.slf4j.Logger;
 
 @RestController
 @RequestMapping("/api/tarefas")
 @CrossOrigin
 public class TarefaController {
     private final TarefaService tarefaService;
+    private static final Logger logger = LoggerFactory.getLogger(TarefaController.class);
+
 
     public TarefaController(TarefaService tarefaService) {
         this.tarefaService = tarefaService;
@@ -51,7 +55,9 @@ public class TarefaController {
     // Endpoint para criar uma nova tarefa
     @PostMapping()
     public Tarefa criarTarefa(@RequestBody Tarefa tarefa) {
-        return tarefaService.criarTarefa(tarefa);
+    logger.info("Criando tarefa - Payload recebido: titulo='{}', descricao='{}', status='{}'", 
+                tarefa.getTitulo(), tarefa.getDescricao(), tarefa.getStatus());
+    return tarefaService.criarTarefa(tarefa);
     }
 
     // ENDPOINT PARA ATUALIZAR UMA TAREFA (PUT) 

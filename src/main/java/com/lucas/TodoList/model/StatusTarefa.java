@@ -1,8 +1,7 @@
 package com.lucas.TodoList.model;
 
-    public enum StatusTarefa {
+public enum StatusTarefa {
     PENDENTE,
     CONCLUIDA,
     EM_ANDAMENTO;
 }
-

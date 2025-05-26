@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { TarefaData } from '../../interface/tarefaData';
-import './TarefaForm.css';
+import './tarefaForm.css';
 
 const API_URL = "http://localhost:3000/api/tarefas";
 

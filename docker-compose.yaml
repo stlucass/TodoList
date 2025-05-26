@@ -1,0 +1,58 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: todolist_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: listatarefas
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - todolist_network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d listatarefas" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: todolist_backend
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/listatarefas
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
+      SERVER_PORT: 3000
+    networks:
+      - todolist_network
+
+  frontend:
+    build:
+      context: ./frontend/TodoList
+      dockerfile: Dockerfile
+    container_name: todolist_frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - todolist_network
+
+volumes:
+  postgres_data:
+
+
+networks:
+  todolist_network:
+    driver: bridge

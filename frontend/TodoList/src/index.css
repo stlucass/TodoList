@@ -118,9 +118,9 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: var(--cor-amarelo-principal);
+  border-color: var(--cor-azul-acao);
   background-color: var(--cor-superficie);
-  box-shadow: 0 0 0 3px rgba(var(--cor-amarelo-principal-rgb), 0.15);
+  box-shadow: 0 0 0 3px rgba(var(--cor-azul-acao), 0.15);
 }
 
 button {
